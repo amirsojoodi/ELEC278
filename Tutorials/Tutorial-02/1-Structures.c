@@ -21,7 +21,7 @@ typedef struct {
 } student;
 
 void print_student(student s){
-  printf("%s %s, %d\n", s.first_name, s.last_name, s.student_id);
+  printf("%s %s %d\n", s.first_name, s.last_name, s.student_id);
 }
 
 void main() {
@@ -45,6 +45,9 @@ void main() {
   strcpy(b.last_name, "Bing");
   fscanf(input, "%d\n", &b.student_id);
 
-  fprintf(output, "%s %s, %d\n", a.first_name, a.last_name, a.student_id);
-  fprintf(output, "%s %s, %d\n", b.first_name, b.last_name, b.student_id);
+  fprintf(output, "%s %s %d\n", a.first_name, a.last_name, a.student_id);
+  fprintf(output, "%s %s %d\n", b.first_name, b.last_name, b.student_id);
+
+  fclose(input);
+  fclose(output);
 }
