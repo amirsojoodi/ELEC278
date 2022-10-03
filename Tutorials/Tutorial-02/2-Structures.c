@@ -22,10 +22,13 @@ typedef struct {
   int student_id;
 } student;
 
-void print_student(student s) { printf("%s %s %d\n", s.first_name, s.last_name, s.student_id); }
+void print_student(student s) { 
+  printf("%s %s %d\n", s.first_name, s.last_name, s.student_id); 
+}
 
 void main() {
   student *students;
+  // Another way of declaring an array of students
   // student students[STUDENTS_COUNT];
   
   FILE *input, *output;
