@@ -1,3 +1,12 @@
+/*
+  Tutorial 6 - Recursive Examples
+
+  Code provided for ELEC-278 Tutorial at Queen's University
+
+  @author AmirHossein Sojoodi
+  @date 2022-10
+*/
+
 #include <stdio.h>
 
 int gcd(int n1, int n2) {

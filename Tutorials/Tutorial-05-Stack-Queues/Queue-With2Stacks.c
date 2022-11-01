@@ -1,3 +1,12 @@
+/*
+  Tutorial 5 - Queues and Stacks
+
+  Code provided for ELEC-278 Tutorial at Queen's University
+
+  @author AmirHossein Sojoodi
+  @date 2022-10
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #define N 100  // size for arrays representing stack1 and stack2

@@ -1,3 +1,8 @@
+# Tutorial 7 - Makefile
+# Code provided for ELEC-278 Tutorial at Queen's University
+# @author AmirHossein Sojoodi
+# @date 2022-10
+
 # [target] : [dependency list]
 #	[command]
 
