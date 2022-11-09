@@ -77,7 +77,7 @@ int get_balance_factor(node_t *node) {
 }
 
 node_t *insert(node_t *node, int key) {
-  /* 1. Perform the normal BST insertino */
+  /* 1. Perform the normal BST insertion */
   if (node == NULL)
     return (new_node(key));
 
@@ -245,14 +245,16 @@ int main() {
   root = insert(root, 1);
   root = insert(root, 2);
 
-  /* The constructed AVL Tree would be
-           9
-          / \
-          1 10
-         / \	\
-         0 5	 11
-        / / \
-       -1 2 6
+  /* The constructed Tree would be: (if not an AVL)
+            9
+           / \
+          5  10
+         / \   \
+        0   6	  11
+       / \
+      -1  1
+           \
+            2
   */
 
   printf("Preorder traversal of the constructed AVL tree is \n");
