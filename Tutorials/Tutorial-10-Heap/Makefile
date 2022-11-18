@@ -5,8 +5,8 @@
 
 .PHONY: all clean
 
-BIN_DIR=./bin
-SRC_DIR=./src
+BIN_DIR=bin
+SRC_DIR=src
 
 SRC_FILES:=$(wildcard $(SRC_DIR)/*.c)
 BIN_FILES:=$(patsubst $(SRC_DIR)/%.c, $(BIN_DIR)/%, $(SRC_FILES))
@@ -14,10 +14,11 @@ BIN_FILES:=$(patsubst $(SRC_DIR)/%.c, $(BIN_DIR)/%, $(SRC_FILES))
 all: | $(BIN_DIR) $(BIN_FILES)
 
 $(BIN_DIR):
-	mkdir -p $(BIN_DIR)
+	@echo "Folder $(BIN_DIR) does not exist!"
+	mkdir -p $@
 
-$(BIN_FILES): $(SRC_FILES)
+$(BIN_DIR)/%: $(SRC_DIR)/%.c
 	gcc $< -o $@
 
 clean:
-	rm -f $(BIN_DIR)/*
+	rm -rf $(BIN_DIR)/*.exe
