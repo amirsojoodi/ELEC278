@@ -10,34 +10,34 @@ struct node_st {
 
 typedef struct node_st node_t;
 
-int search(int arr[], int strt, int end, int value);
-node_t* newNode(int data);
+int search(int* arr, int strt, int end, int value);
+node_t* new_node(int data);
 
-node_t* buildTree(int in[], int pre[], int inStrt, int inEnd) {
-  static int preIndex = 0;
-  if (inStrt > inEnd) return NULL;
+node_t* build_tree(int* in, int* pre, int in_start, int in_end) {
+  static int pre_index = 0;
+  if (in_start > in_end) return NULL;
 
-  /* Pick current node from Preorder traversal using preIndex
-  and increment preIndex */
-  node_t* tNode = newNode(pre[preIndex++]);
+  /* Pick current node from Preorder traversal using pre_index
+  and increment pre_index */
+  node_t* tmp_node = new_node(pre[pre_index++]);
 
-  if (inStrt == inEnd) return tNode;
-  int inIndex = search(in, inStrt, inEnd, tNode->data);
+  if (in_start == in_end) return tmp_node;
+  int in_index = search(in, in_start, in_end, tmp_node->data);
 
-  tNode->left = buildTree(in, pre, inStrt, inIndex - 1);
-  tNode->right = buildTree(in, pre, inIndex + 1, inEnd);
+  tmp_node->left = build_tree(in, pre, in_start, in_index - 1);
+  tmp_node->right = build_tree(in, pre, in_index + 1, in_end);
 
-  return tNode;
+  return tmp_node;
 }
 
-int search(int arr[], int strt, int end, int value) {
+int search(int* arr, int strt, int end, int value) {
   int i;
   for (i = strt; i <= end; i++) {
     if (arr[i] == value) return i;
   }
 }
 
-node_t* newNode(int data) {
+node_t* new_node(int data) {
   node_t* node = (node_t*)malloc(sizeof(node_t));
   node->data = data;
   node->left = NULL;
@@ -46,15 +46,15 @@ node_t* newNode(int data) {
   return (node);
 }
 
-void printInorder(node_t* node) {
+void print_inorder(node_t* node) {
   if (node == NULL) return;
 
   /* first recur on left child */
-  printInorder(node->left);
+  print_inorder(node->left);
   /* then print the data of node */
   printf("%d ", node->data);
   /* now recur on right child */
-  printInorder(node->right);
+  print_inorder(node->right);
 }
 int size(node_t* root) {
   if (root == NULL) {
@@ -64,7 +64,7 @@ int size(node_t* root) {
   return 1 + size(root->left) + size(root->right);
 }
 
-bool isHeap(node_t* root, int i, int n) {
+bool is_heap(node_t* root, int i, int n) {
   // base case
   if (root == NULL) {
     return true;
@@ -81,13 +81,13 @@ bool isHeap(node_t* root, int i, int n) {
     return false;
   }
 
-  return isHeap(root->left, 2 * i + 1, n) && isHeap(root->right, 2 * i + 2, n);
+  return is_heap(root->left, 2 * i + 1, n) && is_heap(root->right, 2 * i + 2, n);
 }
 
 // Function to check if a given binary tree is a min-heap or not
-bool isHeapo(node_t* root) {
+bool is_heapo(node_t* root) {
   int i = 0;
-  return isHeap(root, i, size(root));
+  return is_heap(root, i, size(root));
 }
 
 int main() {
@@ -111,17 +111,17 @@ int main() {
       scanf("%d", &temp1);
       pre[t] = temp1;
   }
-  node_t* root = buildTree(in, pre, 0, n - 1);
+  node_t* root = build_tree(in, pre, 0, n - 1);
 */
   int in[] = {5, 3, 6, 2, 8, 4, 10};
   int pre[] = {2, 3, 5, 6, 4, 8, 10};
   int len = sizeof(in) / sizeof(in[0]);
-  node_t* root = buildTree(in, pre, 0, len - 1);
+  node_t* root = build_tree(in, pre, 0, len - 1);
 
   printf("Inorder traversal of the constructed tree is \n");
-  printInorder(root);
+  print_inorder(root);
 
-  if (isHeapo(root)) {
+  if (is_heapo(root)) {
     printf("\nGiven binary tree is a Heap\n");
   } else {
     printf("\nGiven binary tree is not a Heap\n");

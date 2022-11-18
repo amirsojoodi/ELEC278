@@ -1,3 +1,13 @@
+/*
+  Tutorial 10
+
+  Code provided for ELEC-278 Tutorial at Queen's University
+
+  Adapted from David Athersych
+  @author AmirHossein Sojoodi
+  @date 2022-11
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -8,7 +18,7 @@ struct node_st {
 
 typedef struct node_st node_t;
 
-node_t* newNode(int key) {
+node_t* new_node(int key) {
   node_t* node = (node_t*)malloc(sizeof(node_t));
   node->key = key;
   node->left = node->right = NULL;
@@ -26,12 +36,12 @@ void inorder(node_t* root) {
   inorder(root->right);
 }
 
-node_t* constructBST(int postorder[], int start, int end) {
+node_t* construct_BST(int postorder[], int start, int end) {
   if (start > end) {
     return NULL;
   }
 
-  node_t* node = newNode(postorder[end]);
+  node_t* node = new_node(postorder[end]);
 
   int i;
   for (i = end; i >= start; i--) {
@@ -39,10 +49,10 @@ node_t* constructBST(int postorder[], int start, int end) {
       break;
     }
   }
-  node->right = constructBST(postorder, i + 1, end - 1);
+  node->right = construct_BST(postorder, i + 1, end - 1);
 
   // recursively construct the left subtree
-  node->left = constructBST(postorder, start, i);
+  node->left = construct_BST(postorder, start, i);
 
   // return current node
   return node;
@@ -53,7 +63,7 @@ int main(void) {
   int n = sizeof(postorder) / sizeof(postorder[0]);
 
   // construct the BST
-  node_t* root = constructBST(postorder, 0, n - 1);
+  node_t* root = construct_BST(postorder, 0, n - 1);
 
   // print the BST
   printf("Inorder traversal of BST is: \n");

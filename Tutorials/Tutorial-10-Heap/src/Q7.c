@@ -1,4 +1,14 @@
-﻿#include <stdio.h>
+﻿/*
+  Tutorial 10
+
+  Code provided for ELEC-278 Tutorial at Queen's University
+
+  Adapted from David Athersych
+  @author AmirHossein Sojoodi
+  @date 2022-11
+*/
+
+#include <stdio.h>
 #include <stdlib.h>
 
 void swap(int* a, int* b) {
@@ -7,7 +17,7 @@ void swap(int* a, int* b) {
   *a = temp;
 }
 
-void max_heapify(int arr[], int start, int end) {
+void max_heapify(int *arr, int start, int end) {
   int parent = start;
   int child = parent * 2 + 1;
   while (child <= end) {
@@ -22,7 +32,7 @@ void max_heapify(int arr[], int start, int end) {
   }
 }
 
-void heap_sort(int arr[], int len) {
+void heap_sort(int *arr, int len) {
   int i;
   for (i = len / 2 - 1; i >= 0; i--) max_heapify(arr, i, len - 1);
   for (i = len - 1; i > 0; i--) {

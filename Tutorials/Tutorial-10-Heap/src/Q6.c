@@ -1,3 +1,13 @@
+/*
+  Tutorial 10
+
+  Code provided for ELEC-278 Tutorial at Queen's University
+
+  Adapted from David Athersych
+  @author AmirHossein Sojoodi
+  @date 2022-11
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -9,7 +19,7 @@ struct node_st {
 
 typedef struct node_st node_t;
 
-node_t* newNode(int key) {
+node_t* new_node(int key) {
   node_t* node = (node_t*)malloc(sizeof(node_t));
   node->data = key;
   node->left = node->right = NULL;
@@ -32,7 +42,7 @@ void inorder(node_t* root) {
 node_t* insert(node_t* root, int key) {
   // if the root is null, create a new node and return it
   if (root == NULL) {
-    root = newNode(key);
+    root = new_node(key);
     return root;
   }
   // if the given key is less than the root node, recur for the left subtree
@@ -48,13 +58,13 @@ node_t* insert(node_t* root, int key) {
 
 // Function to find the k'th largest node in a BST.
 // Here, `i` denotes the total number of nodes processed so far
-node_t* kthLargest(node_t* root, int* i, int k) {
+node_t* kth_largest(node_t* root, int* i, int k) {
   // base case
   if (root == NULL) {
     return NULL;
   }
   // search in the right subtree
-  node_t* left = kthLargest(root->right, i, k);
+  node_t* left = kth_largest(root->right, i, k);
 
   // if k'th largest is found in the left subtree, return it
   if (left) {
@@ -65,16 +75,16 @@ node_t* kthLargest(node_t* root, int* i, int k) {
     return root;
   }
   // otherwise, search in the left subtree
-  return kthLargest(root->left, i, k);
+  return kth_largest(root->left, i, k);
 }
 
 // Function to find the k'th largest node in a BST
-node_t* findKthLargest(node_t* root, int k) {
+node_t* find_kth_largest(node_t* root, int k) {
   // maintain index to count the total number of nodes processed so far
   int i = 0;
 
   // traverse the tree in an inorder fashion and return k'th node
-  return kthLargest(root, &i, k);
+  return kth_largest(root, &i, k);
 }
 
 int main() {
@@ -87,7 +97,7 @@ int main() {
   }
 
   int k = 2;
-  node_t* node = findKthLargest(root, k);
+  node_t* node = find_kth_largest(root, k);
 
   if (node != NULL) {
     printf("%d", node->data);

@@ -1,3 +1,13 @@
+/*
+  Tutorial 10
+
+  Code provided for ELEC-278 Tutorial at Queen's University
+
+  Adapted from David Athersych
+  @author AmirHossein Sojoodi
+  @date 2022-11
+*/
+
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,7 +19,7 @@ struct node_st {
 
 typedef struct node_st node_t;
 
-node_t* newNode(int key) {
+node_t* new_node(int key) {
   node_t* node = (node_t*)malloc(sizeof(node_t));
   node->data = key;
   node->next = NULL;
@@ -19,7 +29,7 @@ node_t* newNode(int key) {
 
 /* Function to print nodes in
    a given linked list */
-void printList(node_t* node) {
+void print_list(node_t* node) {
   while (node != NULL) {
     printf("%d ", node->data);
     node = node->next;
@@ -30,7 +40,7 @@ void printList(node_t* node) {
 // takes an array of lists
 // arr[0..last] and generates
 // the sorted output
-node_t* mergeKLists(node_t* arr[], int last) {
+node_t* merge_k_lists(node_t* arr[], int last) {
   // Traverse form second list to last
   for (int i = 1; i <= last; i++) {
     while (true) {
@@ -87,24 +97,24 @@ int main() {
   // head nodes of the linked lists
   node_t* arr[3];
 
-  arr[0] = newNode(1);
-  arr[0]->next = newNode(5);
-  arr[0]->next->next = newNode(7);
-  arr[0]->next->next->next = newNode(7);
+  arr[0] = new_node(1);
+  arr[0]->next = new_node(5);
+  arr[0]->next->next = new_node(7);
+  arr[0]->next->next->next = new_node(7);
 
-  arr[1] = newNode(2);
-  arr[1]->next = newNode(3);
-  arr[1]->next->next = newNode(6);
-  arr[1]->next->next->next = newNode(9);
+  arr[1] = new_node(2);
+  arr[1]->next = new_node(3);
+  arr[1]->next->next = new_node(6);
+  arr[1]->next->next->next = new_node(9);
 
-  arr[2] = newNode(4);
-  arr[2]->next = newNode(8);
-  arr[2]->next->next = newNode(10);
+  arr[2] = new_node(4);
+  arr[2]->next = new_node(8);
+  arr[2]->next->next = new_node(10);
 
   // Merge all lists
-  node_t* head = mergeKLists(arr, k - 1);
+  node_t* head = merge_k_lists(arr, k - 1);
 
-  printList(head);
+  print_list(head);
 
   return 0;
 }
