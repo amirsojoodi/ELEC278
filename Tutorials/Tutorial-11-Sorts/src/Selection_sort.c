@@ -14,7 +14,7 @@ course and the semester listed above.
 See LICENCE.MD for restrictions on the use of this code.
 ---------------------------------------------------------------------------- */
 
-
+#include "Utilities.h"
 
 int findbiggest (int *pd, int min, int max)
 // Fuction finds biggest value in array pd, between locations (indexes)

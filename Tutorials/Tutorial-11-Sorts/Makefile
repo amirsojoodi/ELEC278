@@ -8,16 +8,18 @@
 BIN_DIR=bin
 SRC_DIR=src
 
-SRC_FILES:=$(wildcard $(SRC_DIR)/*.c)
-BIN_FILES:=$(patsubst $(SRC_DIR)/%.c, $(BIN_DIR)/%, $(SRC_FILES))
+# SRC_FILES:=$(wildcard $(SRC_DIR)/*.c)
+# BIN_FILES:=$(patsubst $(SRC_DIR)/%.c, $(BIN_DIR)/%, $(SRC_FILES))
+SRC_FILE = $(SRC_DIR)/Test_sort.c
+BIN_FILE = $(BIN_DIR)/Test_sort.exe
 
-all: | $(BIN_DIR) $(BIN_FILES)
+all: | $(BIN_DIR) $(BIN_FILE)
 
 $(BIN_DIR):
 	@echo "Folder $(BIN_DIR) does not exist!"
 	mkdir -p $@
 
-$(BIN_DIR)/%: $(SRC_DIR)/%.c
+$(BIN_FILE): $(SRC_FILE)
 	gcc $< -o $@
 
 clean:

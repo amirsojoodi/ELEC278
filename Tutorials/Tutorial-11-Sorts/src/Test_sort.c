@@ -20,9 +20,7 @@ course and the semester listed above.
 See LICENCE.MD for restrictions on the use of this code.
 ---------------------------------------------------------------------------- */
 
-
-#include <stdio.h>
-#include <time.h>
+#include "Utilities.h"
 
 // Array containing initial data
 #define	MAXINDEX	19			// how much actual data
@@ -30,20 +28,15 @@ int data [100]	= {
 	44, 22,  3, 71, 16, 82,  1,  9, 99, 10,
 	32, 18, 77, 28,  9, 17, 52, 61, 38, 12 };
 
-// "Global" variables
-int					verbose = 0;
-long unsigned int	swaps = 0;			// may be lots of swaps
-
-#include "L5_UTILITYCODE.c"
-#include "L5_BUBBLESORT.c"
-#include "L5_HEAPSORT.C"
-#include "L5_INSTSORT.C"
-#include "L5_MERGESORT.C"
-#include "L5_QUICKSORT.C"
-#include "L5_RADXSORT.C"
-#include "L5_SELSORT.C"
-#include "L5_SHELLSORT.C"
-
+#include "Bubble_sort.c"
+#include "Bucket_sort.c"
+#include "Heap_sort.c"
+#include "Insertion_sort.c"
+#include "Merge_sort.c"
+#include "Quick_sort.c"
+#include "Radix_sort.c"
+#include "Selection_sort.c"
+#include "Shell_sort.c"
 
 int main (void)
 {
@@ -53,7 +46,7 @@ int main (void)
 	int			size;
 
 	// Fetch data
-	size = read_int_file ("RANDOM.TXT", &pa);
+	size = read_int_file ("./data/Random.txt", &pa);
 	//size = read_int_file ("ASCENDING.TXT", &pa);
 	//size = read_int_file ("DESCENDING.TXT", &pa);
 	//return 0;

@@ -15,7 +15,7 @@ course and the semester listed above.
 See LICENCE.MD for restrictions on the use of this code.
 ---------------------------------------------------------------------------- */
 
-
+#include "Utilities.h"
 
 int insertionsort (int *a, int min, int max)
 // Work through array of numbers, placing each one in the correct place. Note
