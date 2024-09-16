@@ -6,7 +6,7 @@ int main() {
   int rows = 3, cols = 3;
 
   // To do: allocate memory for the array of pointers to rows
-  int **array = ;
+  int **array;
   if (array == NULL) {
     fprintf(stderr, "Memory allocation failed\n");
     return 1;
