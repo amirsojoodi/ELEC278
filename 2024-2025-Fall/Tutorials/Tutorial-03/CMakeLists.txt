@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(Tutorial-02 LANGUAGES C)
+project(Tutorial-03 LANGUAGES C)
 set(CMAKE_C_STANDARD 11)
 
 # Build with this to add warning checks
