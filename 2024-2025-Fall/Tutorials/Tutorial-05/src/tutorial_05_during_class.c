@@ -18,6 +18,7 @@ deque_t* deque_create(int k) {
   deque->size = 0;
   deque->front = 0;
   deque->last = -1;
+  return deque;
 }
 
 // Check if deque is empty
