@@ -16,64 +16,65 @@ void insertAtBeginning(struct Node** head, int newData) {
 
 // Function to delete a node
 void deleteNode(struct Node** head, int key) {
-  struct Node *temp = *head, *prev = NULL;
-  if (temp != NULL && temp->data == key) {
-    *head = temp->next;
-    free(temp);
+  // base case
+  if (*head == NULL) {
     return;
   }
-  while (temp != NULL && temp->data != key) {
-    prev = temp;
-    temp = temp->next;
+  // the head of the list
+  if ((*head)->data == key) {
+    struct Node* tmp = (*head)->next;
+    free(*head);
+    *head = tmp;
+    return;
   }
-  if (temp == NULL) return;
-  prev->next = temp->next;
-  free(temp);
+  // printf("in deleteNode, head->data = %d \n", (*head)->data);
+  deleteNode(&((*head)->next), key);
 }
 
 // Function to search for a node
 int searchNode(struct Node* head, int key) {
-  struct Node* current = head;
-  while (current != NULL) {
-    if (current->data == key) return 1;
-    current = current->next;
+  if (head == NULL) {
+    return 0;
   }
-  return 0;
+  if (head->data == key) {
+    return 1;
+  }
+  return searchNode(head->next, key);
 }
 
 // Function to reverse the linked list
-void reverseList(struct Node** head) {
-  struct Node* prev = NULL;
-  struct Node* current = *head;
-  struct Node* next = NULL;
-  while (current != NULL) {
-    next = current->next;
-    current->next = prev;
-    prev = current;
-    current = next;
+void reverseList(struct Node** head, struct Node *curr) {
+  // base case
+  if (curr == NULL) {
+    return;
   }
-  *head = prev;
+  if (curr->next == NULL) {
+    *head = curr;
+    return;
+  }
+  reverseList(head, curr->next);
+  curr->next->next = curr;
+  curr->next = NULL;
 }
 
 // Function to calculate the length of the linked list
 int listLength(struct Node* head) {
-  int length = 0;
-  struct Node* current = head;
-  while (current != NULL) {
-    length++;
-    current = current->next;
+  // base case
+  if (head == NULL) {
+    return 0;
   }
-  return length;
+  return 1 + listLength(head->next);
 }
 
 // Function to display the linked list
 void printList(struct Node* head) {
-  struct Node* current = head;
-  while (current != NULL) {
-    printf("%d -> ", current->data);
-    current = current->next;
+  // Base case
+  if (head == NULL) {
+    printf("NULL\n");
+    return;
   }
-  printf("NULL\n");
+  printf("%d -> ", head->data);
+  printList(head->next);
 }
 
 int main() {
@@ -81,11 +82,13 @@ int main() {
   insertAtBeginning(&head, 1);
   insertAtBeginning(&head, 2);
   insertAtBeginning(&head, 3);
+  insertAtBeginning(&head, 4);
+  insertAtBeginning(&head, 5);
   printf("Linked list:\n");
   printList(head);
   printf("Length: %d\n", listLength(head));
   printf("Searching for 2: %s\n", searchNode(head, 2) ? "Found" : "Not Found");
-  reverseList(&head);
+  reverseList(&head, head);
   printf("Reversed linked list:\n");
   printList(head);
   deleteNode(&head, 2);
