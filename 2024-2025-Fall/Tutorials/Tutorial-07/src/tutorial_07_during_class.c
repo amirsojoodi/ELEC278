@@ -29,11 +29,8 @@ struct Node* newNode(int data) {
 }
 
 Node* insertIterative(Node* root, int data) {
-  Node* tmp = newNode(data);
-
-  if (root == NULL) {
-    return tmp;
-  }
+  Node* new_node = newNode(data);
+  if (root == NULL) return new_node;
 
   Node* current = root;
   Node* parent;
@@ -46,11 +43,12 @@ Node* insertIterative(Node* root, int data) {
     }
   }
 
-  if (data > parent->data) {
-    parent->right = tmp;
+  if (parent->data > data) {
+    parent->left = new_node;
   } else {
-    parent->left = tmp;
+    parent->right = new_node;
   }
+
   return root;
 }
 
@@ -71,24 +69,67 @@ struct Node* findMin(struct Node* node) {
   return current;
 }
 
+Node* findMinRecursive(Node* root) {
+  if (root->left == NULL) {
+    return root;
+  }
+  return findMinRecursive(root->left);
+}
+
 Node* deleteIterative(Node* root, int key) {
-  if (root == NULL) return root;
+  if (root == NULL) {
+    return root;
+  }
 
   Node* current = root;
   Node* parent = NULL;
   while (current != NULL) {
     parent = current;
-    if (key > current->data) {
+    if (current->data > key) {
       current = current->right;
-    } else if (key < current->data) {
+    } else if (current->data < key) {
       current = current->left;
+    } else {
+      break;
     }
   }
 
-  if (current == NULL) return root;
+  // we found the node to be deleted
+  if (current == NULL) {
+    return root;
+  }
 
-  // 
-  
+  // handle leafs
+  if (current->right == NULL && current->left == NULL) {
+    free(current);
+    if (parent->data > key) {
+      parent->left = NULL;
+    } else {
+      parent->right = NULL;
+    }
+    return root;
+  }
+
+  // handle nodes with only one child
+  if (current->right == NULL || current->left == NULL) {
+    if (current->right == NULL) {
+      if (parent->data > key) {
+        parent->left = current->left;
+      } else {
+        parent->right = current->left;
+      }
+    } else {
+      if (parent->data > key) {
+        parent->left = current->right;
+      } else {
+        parent->right = current->right;
+      }
+    }
+    free(current);
+    return root;
+  }
+
+  //TODO: incomplete, see the tutorial solutions
 }
 
 // Recursive function to delete a node
@@ -159,17 +200,8 @@ int main() {
   printf("\n");
 
   root = deleteRecursive(root, 20);
-  printTree(root, 0);
-  printf("===============================\n");
-
   root = deleteRecursive(root, 30);
-  printTree(root, 0);
-  printf("===============================\n");
-
   root = deleteRecursive(root, 50);
-  printTree(root, 0);
-  printf("===============================\n");
-
 
   printf("Inorder traversal after deletion: ");
   inorder(root);
